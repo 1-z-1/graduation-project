@@ -1,17 +1,15 @@
-from email import header
 import json
 import urllib.request
 import urllib.parse
 import urllib.error
 import pandas as pd
 import talib
-import matplotlib.pyplot as plt
 import os
-import matplotlib.dates as mdates
+
 
 os.chdir('.\Desktop\毕业设计')
 
-# 请求数据，并对获得的数据初步处理
+# 请求数据
 header = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) ',
 }
@@ -42,6 +40,5 @@ data['FASTK'],data['FASTD'] = talib.STOCHF(data['MAX'],data['MIN'],data['CLOSE']
 data['RSI'] = talib.RSI(data['CLOSE'], timeperiod=7)
 data['WR'] = talib.WILLR(data['MAX'], data['MIN'], data['CLOSE'], timeperiod=14)
 data['MACD'],signal,hist=talib.MACD(data['CLOSE'])
-data.to_excel('data.xlsx')
-
-#画图
+# 数据存储
+data.to_excel('BTCdata.xlsx')
