@@ -40,6 +40,7 @@ data['FASTK'],data['FASTD'] = talib.STOCHF(data['MAX'],data['MIN'],data['CLOSE']
 data['RSI'] = talib.RSI(data['CLOSE'], timeperiod=7)
 data['WR'] = talib.WILLR(data['MAX'], data['MIN'], data['CLOSE'], timeperiod=14)
 data['MACD'],signal,hist=talib.MACD(data['CLOSE'])
+#准备对技术指标进行移位
 
 # 数据存储
 data.to_excel('MetaBTCData.xlsx',index=False)
