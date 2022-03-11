@@ -25,16 +25,12 @@ data['MAX'] = data['MAX']/10000*6.32
 data['MIN'] = data['MIN']/10000*6.32
 data['VOLUME'] = data['VOLUME']/10000*6.32
 
-print(data)
+
 #准备对技术指标进行移位
 data1 = data[['MFI','ROC','TRIX','ADOSC','CCI','SLOWK','RSI','WR','MACD','FASTK','FASTD','SLOWD','VOLUME','MAX','MIN','CLOSE']] # 昨日能看到的
 data2 = data[['OPEN','RESULT','date']]# 今日能看到的
-data1 = data1.drop(data1.index[525]).reset_index()
-data2 = data2.drop(data1.index[0]).reset_index()
-data = pd.concat([data1,data2],axis=1)
-
+data1 = data1.drop(data1.index[525]).reset_index(drop=True)
+data2 = data2.drop(data1.index[0]).reset_index(drop=True)
+data = data1.join(data2)
+print(data)
 data.to_excel('LogisticData.xlsx',index=False)
-
-
-
-

@@ -1,3 +1,4 @@
+# Load library and data
 library('rsq')
 library('pROC')
 setwd('C:/Users/24238/Desktop/±œ“µ…Ëº∆')
@@ -7,12 +8,17 @@ index <-  sort(sample(nrow(data), nrow(data)*.75))
 train <- data[index,]
 test <-  data[-index,]
 attach(train)
+data = data[1:18]
+#Some statistical magnitude
+apply(data,2,min)
+apply(data,2,max)
+apply(data,2,sd)
+apply(data,2,mean)
+# AIC and Full Model
 train.glm=glm(RESULT~OPEN+CLOSE+MAX+MIN+VOLUME+
                 CCI+RSI+TRIX+MFI+FASTD+WR+
                 MACD+SLOWD+FASTK+ROC,family=
-          binomial(link='logit'),maxit=200)
-
-# AIC Model
+                binomial(link='logit'),maxit=200)
 step(train.glm)
 train.AIC=glm(formula =  RESULT ~ OPEN + CLOSE + MAX + TRIX + FASTD + FASTK, 
               family = binomial(link = "logit"), 
