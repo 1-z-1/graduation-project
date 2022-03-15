@@ -30,7 +30,7 @@ if __name__ == '__main__':
     # 数据准备
     data = pd.read_excel('LogisticData.xlsx')
 
-    xData = torch.tensor(np.array(data.drop(['VOLUME', 'RESULT','date'], axis=1)),
+    xData = torch.tensor(np.array(data.drop(['VOLUME', 'RESULT', 'date'], axis=1)),
                          dtype=torch.float32)
     yRes = torch.tensor(np.array(data['RESULT']), dtype=torch.float32)
     x_train, x_test, y_train, y_test = model_selection.train_test_split(xData, yRes, test_size=0.2, random_state=467898)
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     # 优化过程
     optimizer = optim.Adam(model.parameters(), lr=0.0001)
 
-    for epoch in range(800):
+    for epoch in range(10000):
         y_train_p = model(x_train)
         # 计算loss
         loss = lossFunc(y_train_p.squeeze(-1), y_train)

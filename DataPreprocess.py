@@ -20,17 +20,17 @@ for i in range(data.index.size):
         res.append(0)
 data['RESULT'] = res
 # 单位万元
-data['OPEN'] = data['OPEN'] / 10000 * 6.32
-data['CLOSE'] = data['CLOSE'] / 10000 * 6.32
-data['MAX'] = data['MAX'] / 10000 * 6.32
-data['MIN'] = data['MIN'] / 10000 * 6.32
-data['VOLUME'] = data['VOLUME'] / 10000 * 6.32
+data['OPEN'] = data['OPEN'] / 10000 * 6.3
+data['CLOSE'] = data['CLOSE'] / 10000 * 6.3
+data['MAX'] = data['MAX'] / 10000 * 6.3
+data['MIN'] = data['MIN'] / 10000 * 6.3
+data['VOLUME'] = data['VOLUME'] / 10000 * 6.3
 
 # 准备对技术指标进行移位
 data1 = data[
     ['MFI', 'ROC', 'TRIX', 'ADOSC', 'CCI', 'SLOWK', 'RSI', 'WR', 'MACD', 'FASTK', 'FASTD', 'SLOWD', 'VOLUME', 'MAX',
-     'MIN', 'CLOSE']]  # 昨日能看到的
-data2 = data[['OPEN', 'RESULT', 'date']]  # 今日能看到的
+     'MIN']]  # 昨日能看到的
+data2 = data[['OPEN', 'RESULT', 'date', 'CLOSE']]  # 今日能看到的(神经网络时需将CLOSE放下面)
 data1 = data1.drop(data1.index[525]).reset_index(drop=True)
 data2 = data2.drop(data1.index[0]).reset_index(drop=True)
 data = data1.join(data2)
